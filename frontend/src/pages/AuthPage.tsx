@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Book, GitBranch, ArrowRight, Globe, Mail, Lock, User, ArrowLeft } from "lucide-react";
+import { Book, GitBranch, Globe, Mail, Lock, User, ArrowLeft } from "lucide-react";
 import { authApi } from "../api/client";
 import { useAuthStore } from "../store/authStore";
 import { useNavigate, Link } from "react-router-dom";
