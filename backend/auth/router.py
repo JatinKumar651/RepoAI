@@ -117,15 +117,18 @@ async def google_sign_in():
     redirect back to the configured callback URL with tokens.
     """
     try:
+        import os
+        frontend_url = os.getenv("FRONTEND_URL", "http://localhost:5173")
+        redirect_to = f"{frontend_url.rstrip('/')}/auth/callback"
         response = supabase_client.auth.sign_in_with_oauth(
             {
                 "provider": "google",
                 "options": {
-                    "redirect_to": "http://localhost:5173/auth/callback",
+                    "redirect_to": redirect_to,
                 },
             }
         )
-        logger.info("Generated Google OAuth URL")
+        logger.info(f"Generated Google OAuth URL with redirect_to: {redirect_to}")
         return OAuthURLResponse(url=response.url)
     except Exception as e:
         logger.error(f"Failed to generate OAuth URL: {e}")
