@@ -37,14 +37,23 @@ app = FastAPI(
 import os
 
 # ── CORS ────────────────────────────────────────────────────
-frontend_url = os.getenv("FRONTEND_URL", "http://localhost:5173")
-origins = [
+frontend_url = os.getenv("FRONTEND_URL", "https://repo-ai-ts8w.vercel.app")
+
+raw_origins = [
     "http://localhost:5173",
     "http://127.0.0.1:5173",
     "http://localhost:8000",
     "http://127.0.0.1:8000",
+    "https://repo-ai-ts8w.vercel.app",
     frontend_url,
 ]
+
+origins = []
+for origin in raw_origins:
+    if origin and isinstance(origin, str):
+        cleaned = origin.strip().strip("'").strip('"').rstrip("/")
+        if cleaned and cleaned not in origins:
+            origins.append(cleaned)
 
 app.add_middleware(
     CORSMiddleware,
