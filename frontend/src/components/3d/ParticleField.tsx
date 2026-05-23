@@ -30,6 +30,7 @@ function Particles({ count = 2000, color = "#7c3aed" }: { count?: number; color?
           count={positions.length / 3}
           array={positions}
           itemSize={3}
+          args={[positions, 3]}
         />
       </bufferGeometry>
       <pointsMaterial
